@@ -3,6 +3,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 public class LeagueInvaders {
+	public static final int WIDTH = 0;
+	public static final int HEIGHT = 0;
 	JFrame frame = new JFrame();
 	int height = 800;
 	int width = 500;
