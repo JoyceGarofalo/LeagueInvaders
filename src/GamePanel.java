@@ -16,6 +16,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
 	Font titleFont;
+	Font subFont;
+	Rocketship rocket = new Rocketship(250, 700, 50, 50);
+	ObjectManager objectM;
 	
 	void startGame() {
 		timer.start();
@@ -26,6 +29,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	GamePanel(){
 		startGame();
 		titleFont = new Font("Arial", Font.PLAIN, 48);
+		subFont = new Font("Arial", Font.PLAIN, 20);
+		objectM = new ObjectManager(rocket);
+		
 	}
 	
 	void updateMenuState() {
@@ -33,6 +39,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
+		objectM.update();
 		
 	}
 	
@@ -43,19 +50,30 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void drawMenuState(Graphics g) {
 		g.setColor(Color.BLUE);
 		g.fillRect(0, 0, 500, 800);
-		g.setFont(titleFont);
-		g.drawString("League Invaders", 250, 100);
 		g.setColor(Color.WHITE);
+		g.setFont(titleFont);
+		g.drawString("League Invaders", 65, 150);
+		g.setFont(subFont);
+		g.drawString("press enter to start", 152, 350);
+		
 	}
 	
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 800);
+		objectM.draw(g);
+		
+		
 	}
 	
 	void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
 		g.fillRect(0, 0, 500, 800);
+		g.setColor(Color.BLACK);
+		g.setFont(titleFont);
+		g.drawString("Game Over", 126, 150);
+		g.setFont(subFont);
+		g.drawString("press enter to restart", 150, 350);
 	}
 	
 	@Override
@@ -102,11 +120,39 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if(currentState > END_STATE) {
 			currentState = MENU_STATE;
 		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_UP) {
+			rocket.up = true;
+		}
+		else if(e.getKeyCode() == 39) {
+			rocket.right = true;
+		}
+		else if(e.getKeyCode() == 40) {
+			rocket.down = true;
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			rocket.left = true;
+		}
+		
+		
+		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-
+		if(e.getKeyCode() == KeyEvent.VK_UP) {
+			rocket.up = false;
+		}
+		else if(e.getKeyCode() == 39) {
+			rocket.right = false;
+		}
+		else if(e.getKeyCode() == 40) {
+			rocket.down = false;
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			rocket.left = false;
+		}
+		
 	}
 }
