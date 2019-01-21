@@ -19,7 +19,7 @@ public class Projectile extends GameObject{
 	}
 	void draw(Graphics g) {
 		g.setColor(Color.RED);
-		g.drawRect(x, y, width, height);
+		g.drawRect(x+20, y, width, height);
 	}
 	
 	
