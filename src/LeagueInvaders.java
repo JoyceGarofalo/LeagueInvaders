@@ -3,11 +3,10 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 public class LeagueInvaders {
-	public static final int WIDTH = 0;
-	public static final int HEIGHT = 0;
+	public static final int WIDTH = 500;
+	public static final int HEIGHT = 800;
 	JFrame frame = new JFrame();
-	int height = 800;
-	int width = 500;
+
 	GamePanel game = new GamePanel();
 
 	public static void main(String[] args) {
@@ -19,7 +18,7 @@ public class LeagueInvaders {
 	void setup() {
 		frame.add(game);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setPreferredSize(new Dimension(width, height));
+		frame.getContentPane().setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		frame.setVisible(true);
 		frame.addKeyListener(game);
 		frame.pack();
