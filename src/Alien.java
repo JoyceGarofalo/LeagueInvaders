@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
-public class Alien {
+public class Alien extends GameObject{
 	int x;
 	int y;
 	int width;
@@ -10,18 +10,22 @@ public class Alien {
 	int mode = -1;
 
 	Alien(int x, int y, int width, int height) {
+		super(x, y, width, height);
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		
 	}
 
 	void draw(Graphics g) {
 		g.setColor(Color.YELLOW);
 		g.drawRect(x, y, width, height);
+		g.fillRect(x, y, width, height);
 	}
 
 	void update() {
+		super.update();
 		Random r = new Random();
 		int rand = r.nextInt(100);
 		if (rand < 10) {
@@ -39,5 +43,7 @@ public class Alien {
 		}
 
 	}
+	
+	
 
 }
