@@ -3,10 +3,10 @@ import java.awt.Graphics;
 import java.util.Random;
 
 public class Alien extends GameObject{
-	int x;
-	int y;
-	int width;
-	int height;
+	//int x;
+	//int y;
+	//int width;
+	//int height;
 	int mode = -1;
 
 	Alien(int x, int y, int width, int height) {
