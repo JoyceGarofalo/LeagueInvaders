@@ -14,23 +14,24 @@ public class Rocketship extends GameObject{
 	}
 	void update(){
 		super.update();
-		if(up) {
-			y -= speed;
-		}
-		else if(right) {
+		
+		if(right) {
 			x += speed;
 		}
 		else if(left) {
 			x -= speed;
 		}
-		else if(down) {
-			y += speed;
+		if(x > 500) {
+			x=0;
 		}
+		if(x < 0) {
+			x=500;
+		}
+
 		
 	}
 	void draw(Graphics g) {
-		g.setColor(Color.BLUE);
-		g.fillRect(x, y, width, height);
+		g.drawImage(GamePanel.rocketImg, x, y, width, height, null);
 		
 		
 	}

@@ -19,9 +19,8 @@ public class Alien extends GameObject{
 	}
 
 	void draw(Graphics g) {
-		g.setColor(Color.YELLOW);
-		g.drawRect(x, y, width, height);
-		g.fillRect(x, y, width, height);
+		g.drawImage(GamePanel.alienImg, x, y, width, height, null);
+
 	}
 
 	void update() {
@@ -31,7 +30,7 @@ public class Alien extends GameObject{
 		if (rand < 10) {
 			mode = r.nextInt(3);
 		}
-		y++;
+		y+=5;
 		if (mode == 0 && x > 0) {
 			x -= 2;
 		}

@@ -8,6 +8,7 @@ public class ObjectManager {
 	ArrayList<Alien> aliens = new ArrayList<Alien>();
 	long enemyTimer = 0;
 	int enemySpawnTime = 1000;
+	int score = 0;
 
 	public ObjectManager(Rocketship rocket) {
 		// TODO Auto-generated constructor stub
@@ -53,7 +54,6 @@ public class ObjectManager {
 	}
 
 	void purgeObjects() {
-		checkCollision();
 		for(int al = 0; al < aliens.size(); al++) {
 			if(!aliens.get(al).isAlive) {
 				aliens.remove(al);
@@ -75,22 +75,25 @@ public class ObjectManager {
 				rocket.isAlive = false;
 			}
 		}
+		
 		for(Projectile projectile : projectiles) {
 			for (int a = 0; a < aliens.size(); a++) {
 				if(aliens.get(a).collisionBox.intersects(projectile.collisionBox)) {
 					aliens.get(a).isAlive = false;
+					projectile.isAlive = false;
+					score++;
+					System.out.println("score:"+score);
+
 				}
 			}
 		}
-		for(Alien alien : aliens) {
-			for(int p = 0; p < projectiles.size(); p++) {
-				if(projectiles.get(p).collisionBox.intersects(alien.collisionBox)) {
-					projectiles.get(p).isAlive = false;
-				}
-			}
-		}
+		
+		
 			
 	}
+	
+	
+	
 	
 	
 

@@ -5,7 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -19,6 +22,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font subFont;
 	Rocketship rocket = new Rocketship(250, 700, 50, 50);
 	ObjectManager objectM;
+	 public static BufferedImage alienImg; 
+     public static BufferedImage rocketImg;
+     public static BufferedImage bulletImg;
+     public static BufferedImage spaceImg;
 
 	void startGame() {
 		timer.start();
@@ -30,6 +37,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		subFont = new Font("Arial", Font.PLAIN, 20);
 		objectM = new ObjectManager(rocket);
+		try {
+
+	         alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
+	         rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
+	         bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
+	         spaceImg = ImageIO.read(this.getClass().getResourceAsStream("space.png"));
+		 } catch (IOException e) {
+
+	         // TODO Auto-generated catch block
+
+	         e.printStackTrace();
+		 }
 
 	}
 
@@ -42,7 +61,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		objectM.update();
 		objectM.manageEnemies();
 		objectM.checkCollision();
-		if(rocket.isAlive = true) {
+		if(rocket.isAlive == true) {
 			
 		}
 		else {
@@ -67,8 +86,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawGameState(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 500, 800);
+		g.drawImage(GamePanel.spaceImg, 0, 0, 500, 800, null);
 		objectM.draw(g);
 
 	}
@@ -83,6 +101,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("press enter to restart", 150, 350);
 	}
 
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -118,7 +137,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == 10) {
+			if(currentState == END_STATE) {
+				rocket = new Rocketship(250, 700, 50, 50);
+				objectM = new ObjectManager(rocket);
+			}
 			currentState += 1;
+			
 		}
 		if (currentState > END_STATE) {
 			currentState = MENU_STATE;
